@@ -4,11 +4,11 @@
     <h1>Current Temperature: {{ currTemp.temperature }}&#176;F</h1>
     <ul id="allTemps">
         <h2>Recent Temperatures</h2>
-        <li v-for="temp in temps">{{ temp.temperature }}&#176;F</li>
+        <li v-for="temp in temps">{{ temp.temperature }}&#176;F - {{ temp.timestamp }}</li>
     </ul>
     <ul id="violations">
         <h2>Threshold Violations (Over {{ threshold }}&#176;F)</h2>
-        <li v-for="temp in violations">{{ temp.temperature }}&#176;F</li>
+        <li v-for="temp in violations">{{ temp.temperature }}&#176;F - {{ temp.timestamp }}</li>
     </ul>
   </div>
 </template>
@@ -45,6 +45,7 @@ export default {
            getTemps: function() {
                             axios.get(this.baseUrl + "inrange_temperatures").then(response => {
                             this.temps = response.data.reverse()
+                            console.log(this.temps);
                             }).catch(err => {
                             });
            },
